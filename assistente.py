@@ -63,7 +63,7 @@ def executar_comando(comando):
     elif "pesquisar" in comando:
         comando = comando.replace("pesquisar", "").strip()
         resultado = wikipedia.summary(comando, sentences=2, lang="pt")
-        falar(f"Aqui está o que encontrei na Wikipédia sobre {comando}:")
+        falar(f"Aqui está o que encontreis na Wikipédia sobre {comando}:")
         falar(resultado)    
         
     elif "abrir Google" in comando:
