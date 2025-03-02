@@ -1,6 +1,6 @@
 horas
 data
-qual o clima em joinville
+qual o clima em (alguma cidade)
 pesquisar (tem que arrumar ainda)
 bloco de notas
 tocar cara
@@ -12,4 +12,5 @@ alarme
 abrir youtube
 ztrem
 abrir google
+desligar pc
 sair

@@ -65,7 +65,55 @@ def tocar_2():
     time.sleep(1)
 
     # Digita e envia o comando no chat (modifique o comando conforme necessário)
+    #musica cara de santa
     pyautogui.write('m!play https://youtu.be/f4eUDjkue9coV5moTylmw95Vwh3')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    #musica sla
+    pyautogui.write('m!play https://youtu.be/AtYuKryoKoI?si=IcNnrhnIXdZPyA8B')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    #piseiro hawaino
+    pyautogui.write('m!play https://youtu.be/oNHES3pEGIw?si=53sYkXOmTOE0LiWu')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    #que isso novinha
+    pyautogui.write('m!play https://youtu.be/POvoGtl-G5Y?si=QNVgcVA4INsYg9Ue')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    
+    #mc jacare (hungria)
+    pyautogui.write('m!play https://youtu.be/_6dTFjad4Vk?si=EvR7XTyJ_LlDdNbO')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    
+    #mc jacare (poupa no chao)
+    pyautogui.write('m!play https://youtu.be/wpbwWROrEPQ?si=XtEubtorf0lfITop')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    
+    #mc jacare (pelo menos)
+    pyautogui.write('m!play https://youtu.be/D6t6FpJ9R88?si=qdCMDmoMBVqI7xlb')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    
+    #casei com a putaria
+    pyautogui.write('m!play https://youtu.be/8NjXVsLHIg8?si=SGxiwkDx4I9b6nvu')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    
+    #mc jacare (boca de mel)
+    pyautogui.write('m!play https://youtu.be/EaWSOxIBhS4?si=NSQJfF630hXil4qc')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    
+    #cara de santa
+    pyautogui.write('m!play https://youtu.be/f4eUDjkue9c?si=2XEJsP2IKwnn9-Fb')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+    
+    #até o sol raiar
+    pyautogui.write('m!play https://youtu.be/mW8o_WDL91o?si=LK5fQSv4jzubnKlr')  # Exemplo: tocar música
     time.sleep(0.1)
     pyautogui.press("enter")
 
@@ -107,7 +155,7 @@ def criar_bloco_notas(nome_arquivo, conteudo):
 def enviar_whatsapp(nome, mensagem):
     """Envia uma mensagem no WhatsApp Web para um contato salvo."""
     contatos = {
-        "coroa": "+55XXXXXXXXXXX",
+        "coroa": "+554799713750",
         "pai": "+55XXXXXXXXXXX",
         "amigo": "+55XXXXXXXXXXX"
     }
@@ -222,11 +270,16 @@ def executar_comando(comando):
     elif "alarme" in comando:
        falar("Que hora você quer definir para o alarme?")
        hora_alarme = ouvir_comando()  # Suponha que o usuário fala a hora
-       hora_alarme = hora_alarme.split("hora")  # Processando a hora
-       tempo_alarme = int(hora_alarme[0].strip()) * 60  # Converte para minutos
-       falar(f"Alarme definido para {hora_alarme[0].strip()} minutos")
-       time.sleep(tempo_alarme)
-       falar("Alarme tocando!")
+       
+       # Tenta extrair o número da hora
+       try:
+           hora_alarme = hora_alarme.split("hora")  # Processando a hora
+           tempo_alarme = int(hora_alarme[0].strip()) * 60  # Converte para minutos
+           falar(f"Alarme definido para {hora_alarme[0].strip()} minutos")
+           time.sleep(tempo_alarme)
+           falar("Alarme tocando!")
+       except ValueError:
+           falar("Desculpe, não consegui entender o tempo. Por favor, tente novamente.")
 
     elif "abrir youtube" in comando:
         falar("Abrindo o Youtube")
@@ -236,13 +289,23 @@ def executar_comando(comando):
         falar("Abrindo o Youtube no canal DJ Julio Beat")
         webbrowser.open("https://www.youtube.com/@DJJULIOBEAT/featured")
 
-    elif "ztrem" in comando:
+    elif "trem" in comando:
         falar("Tocando música no canal DJ Julio Beat")
         webbrowser.open("https://www.youtube.com/watch?v=AtYuKryoKoI")            
 
     elif "abrir google" in comando:
         falar("Abrindo o Google")
-        webbrowser.open("https://www.google.com")    
+        webbrowser.open("https://www.google.com")
+        
+    elif "desligar pc" in comando or "desligar computador" in comando:
+        falar("Tem certeza que deseja desligar o computador? Diga 'sim' para confirmar ou 'não' para cancelar.")
+        confirmacao = ouvir_comando().lower()
+
+        if "sim" in confirmacao:
+            falar("Desligando o computador. Até mais!")
+            os.system("shutdown /s /t 5")  # O PC será desligado em 5 segundos
+        else:
+            falar("Ok, o desligamento foi cancelado.")        
              
 
     elif "sair" in comando or "fechar" in comando:
