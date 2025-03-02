@@ -8,11 +8,14 @@ import os
 import time
 import pywhatkit
 import pyautogui
+import psutil
+import subprocess
 
 # Inicializa o motor de voz
 engine = pyttsx3.init()
 engine.setProperty('rate', 180)  # Velocidade de fala
 engine.setProperty('volume', 1)  # Volume máximo
+
 
 def falar(texto):
     
@@ -20,6 +23,75 @@ def falar(texto):
     engine.say(texto)
     engine.runAndWait()
     
+    
+    
+def tocar_2():
+    """Abre o Discord, entra no canal de voz e envia um comando"""
+    falar("Abrindo o Discord e entrando no canal de voz")
+
+    # Abre o Discord pelo executável
+    os.system = r"C:\Users\gmdes\AppData\Local\Discord\app-1.0.9184\Discord.exe"
+    
+
+    subprocess.run([os.system], check=True)  # Tente abrir o Discord diretamente
+
+
+    # Aguarda o Discord abrir (ajuste conforme necessário)
+    time.sleep(5)
+
+    # Pressiona Ctrl + K para buscar canal
+    pyautogui.hotkey("ctrl", "k")
+    time.sleep(0.4)
+
+
+    canal_voz = "silvaso"  # Altere para o nome correto do seu canal
+    pyautogui.write(canal_voz, interval=0.1)
+    time.sleep(0.3)
+    pyautogui.press("enter")
+    time.sleep(1)
+  
+    pyautogui.hotkey("ctrl", "k")
+    time.sleep(1)
+  
+    # Define o nome do canal de voz (modifique conforme seu Discord)
+    canal_texto = "live"  # Altere para o nome correto do seu canal
+    pyautogui.write(canal_texto, interval=0.1)
+    time.sleep(1)
+    pyautogui.press("enter")
+    time.sleep(1)
+
+    # Atalho para entrar no canal de voz (pressiona ENTER no Discord)
+    pyautogui.press("enter")
+    time.sleep(1)
+
+    # Digita e envia o comando no chat (modifique o comando conforme necessário)
+    pyautogui.write('m!play https://youtu.be/f4eUDjkue9coV5moTylmw95Vwh3')  # Exemplo: tocar música
+    time.sleep(0.1)
+    pyautogui.press("enter")
+
+    falar("Comando enviado com sucesso!")    
+
+
+def fechar_app(nome_app):
+    """Fecha um aplicativo pelo nome do processo"""
+    comando = f"taskkill /F /IM {nome_app}.exe"
+    resultado = os.system(comando)  # Executa o comando no terminal
+    
+    if resultado == 0:
+        print(f"{nome_app} foi finalizado com sucesso!")
+    else:
+        print(f"Erro ao tentar fechar {nome_app}. Verifique o nome do processo.")
+        
+def abrir_app(nome_app):
+    """Abre um aplicativo pelo nome do executável"""
+    comando = f"start {nome_app}.exe"
+    resultado = os.system(comando)
+    
+    if resultado == 0:
+        print(f"{nome_app} foi aberto com sucesso!")
+    else:
+        print(f"Erro ao tentar abrir {nome_app}. Verifique o nome do aplicativo.")        
+
     
 def criar_bloco_notas(nome_arquivo, conteudo):
     """Cria e abre um bloco de notas com o nome e conteúdo informados."""
@@ -35,7 +107,7 @@ def criar_bloco_notas(nome_arquivo, conteudo):
 def enviar_whatsapp(nome, mensagem):
     """Envia uma mensagem no WhatsApp Web para um contato salvo."""
     contatos = {
-        "coroa": "+554799713750",
+        "coroa": "+55XXXXXXXXXXX",
         "pai": "+55XXXXXXXXXXX",
         "amigo": "+55XXXXXXXXXXX"
     }
@@ -85,6 +157,8 @@ def ouvir_comando():
 
 def executar_comando(comando):
     """Executa ações baseadas no comando""" 
+
+    
     if "horas" in comando:
         hora = datetime.datetime.now().strftime("%H:%M")  
         falar(f"Agora são {hora}")
@@ -102,10 +176,16 @@ def executar_comando(comando):
         resultado = wikipedia.summary(comando, sentences=2, lang="pt")  
         falar(resultado)
         
+     
 
     elif "bloco de notas" in comando:
         os.system("notepad")
-        falar("Abrindo Bloco de Notas")   
+        falar("Abrindo Bloco de Notas") 
+        
+     
+    elif "tocar cara" in comando:
+        falar("Abrindo Discord e entrando no canal de voz")
+        tocar_2()  # Chama a função para abrir o Discord
         
         
     elif "nota" in comando:
@@ -115,8 +195,20 @@ def executar_comando(comando):
        falar("O que devo escrever no bloco de notas?")
        conteudo = ouvir_comando()
 
-       criar_bloco_notas(nome_arquivo, conteudo)    
-        
+       criar_bloco_notas(nome_arquivo, conteudo)   
+       
+    elif "fechar" in comando:
+       falar("Qual aplicativo você deseja fechar?")
+       nome_app = ouvir_comando()
+  
+       fechar_app(nome_app)
+       
+    elif "abra" in comando:
+       falar("Qual aplicativo você deseja abrir?")
+       nome_app = ouvir_comando()
+    
+       abrir_app(nome_app)   
+    
     elif "enviar mensagem" in comando:
         falar("Para quem devo enviar?")
         contato = ouvir_comando()
@@ -144,7 +236,7 @@ def executar_comando(comando):
         falar("Abrindo o Youtube no canal DJ Julio Beat")
         webbrowser.open("https://www.youtube.com/@DJJULIOBEAT/featured")
 
-    elif "tocar" in comando:
+    elif "ztrem" in comando:
         falar("Tocando música no canal DJ Julio Beat")
         webbrowser.open("https://www.youtube.com/watch?v=AtYuKryoKoI")            
 
