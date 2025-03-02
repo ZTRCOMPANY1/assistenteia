@@ -155,7 +155,7 @@ def criar_bloco_notas(nome_arquivo, conteudo):
 def enviar_whatsapp(nome, mensagem):
     """Envia uma mensagem no WhatsApp Web para um contato salvo."""
     contatos = {
-        "coroa": "+554799713750",
+        "coroa": "+55xxxxxxxxxx",
         "pai": "+55XXXXXXXXXXX",
         "amigo": "+55XXXXXXXXXXX"
     }
